@@ -1,52 +1,31 @@
-const games = [
-    { title: "Slope", url: "https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/r3333r/slope@main/slope.xml" },
-    { title: "Retro Bowl", url: "https://game316046.konggames.com/gamepro/316046/2/index.html" },
-    { title: "Minecraft", url: "https://classic.minecraft.net" }
-];
+const secretTrigger = document.getElementById('secret-trigger');
 
-const trigger = document.getElementById('secret-trigger');
-const mathPage = document.getElementById('math-page');
-const gamePage = document.getElementById('game-page');
-const gameGrid = document.getElementById('game-grid');
-const overlay = document.getElementById('overlay');
-const player = document.getElementById('game-player');
+// The game you want to play
+const gameUrl = "https://chvin.github.io/react-tetris/"; 
 
-// Unlock games
-trigger.onclick = () => {
-    mathPage.classList.add('hidden');
-    gamePage.classList.remove('hidden');
-    render();
+secretTrigger.onclick = function() {
+    // 1. Open a new blank tab
+    let win = window.open();
+    
+    // 2. Set the URL of the new tab to "about:blank"
+    win.location.href = "about:blank";
+
+    // 3. Create an iframe inside that blank tab that fills the whole screen
+    let iframe = win.document.createElement('iframe');
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = "none";
+    iframe.style.margin = "0";
+    iframe.style.padding = "0";
+    iframe.style.position = "fixed";
+    iframe.style.top = "0";
+    iframe.style.left = "0";
+    
+    // 4. Point the iframe to your game
+    iframe.src = gameUrl;
+
+    // 5. Put the iframe into the blank page
+    win.document.body.style.margin = "0";
+    win.document.body.style.padding = "0";
+    win.document.body.appendChild(iframe);
 };
-
-function render() {
-    gameGrid.innerHTML = '';
-    games.forEach(g => {
-        const div = document.createElement('div');
-        div.className = 'card';
-        div.innerHTML = `<h4>${g.title}</h4>`;
-        div.onclick = () => {
-            player.src = g.url;
-            overlay.classList.remove('hidden');
-        };
-        gameGrid.appendChild(div);
-    });
-}
-
-// THE PANIC KEY (ESC)
-window.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") {
-        overlay.classList.add('hidden');
-        gamePage.classList.add('hidden');
-        mathPage.classList.remove('hidden');
-        player.src = ''; // Stops the game
-        document.title = "iH Match | Semester 2 Resources";
-    }
-});
-const games = [
-    { title: "Slope", url: "https://kdata1.com/2020/05/slope/" },
-    { title: "Retro Bowl", url: "https://game316046.konggames.com/gamepro/316046/2/index.html" },
-    { title: "1v1.LOL", url: "https://1v1.lol/" },
-    { title: "Cookie Clicker", url: "https://orteil.dashnet.org/cookieclicker/" },
-    { title: "Minecraft Classic", url: "https://classic.minecraft.net/" },
-    { title: "Tetris", url: "https://tetris.com/play-tetris" }
-];
