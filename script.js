@@ -12,35 +12,33 @@ window.onload = function() {
 
     function openPortal() {
         document.body.innerHTML = '';
-        document.body.style.background = "white"; // Error pages are usually white
+        document.body.style.background = "white";
         document.body.style.fontFamily = "sans-serif";
         document.body.style.padding = "50px";
 
-        // THE FAKE 404 ERROR PAGE
-        let errorHTML = `
+        // THE FAKE 404 BLUFF
+        document.body.innerHTML = `
             <div style="max-width: 600px; margin: auto;">
                 <h1 style="font-size: 50px; color: #333; margin-bottom: 10px;">404.</h1>
                 <p style="font-size: 18px; color: #666;"><b>The requested URL was not found on this server.</b></p>
                 <p style="font-size: 14px; color: #999;">That’s all we know.</p>
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
                 
-                <div id="hidden-menu" style="opacity: 0.05;"> 
-                    <p style="color: #ccc; font-size: 10px;">Debug_Logs_v4.0.2</p>
+                <div id="hidden-menu" style="opacity: 0.02; transition: opacity 0.3s;"> 
+                    <p style="color: #ccc; font-size: 10px;">Internal_Server_Log_404</p>
                     <div id="game-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;"></div>
                 </div>
             </div>
         `;
-        document.body.innerHTML = errorHTML;
 
-        // Make the menu show up when you hover over the bottom of the error page
         const menu = document.getElementById('hidden-menu');
         menu.onmouseover = () => menu.style.opacity = "1";
-        menu.onmouseout = () => menu.style.opacity = "0.05";
+        menu.onmouseout = () => menu.style.opacity = "0.02";
 
         const grid = document.getElementById('game-grid');
         games.forEach(game => {
             const btn = document.createElement('div');
-            btn.style.cssText = "padding:10px; border:1px solid #eee; cursor:pointer; font-size: 12px; color: #666; text-align:center;";
+            btn.style.cssText = "padding:10px; border:1px solid #eee; cursor:pointer; font-size: 12px; color: #666; text-align:center; background:#fff;";
             btn.innerText = game.title;
             btn.onclick = () => launchGame(game.url);
             grid.appendChild(btn);
