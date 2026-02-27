@@ -66,19 +66,16 @@ function openPortal() {
     document.body.innerHTML = `
         <div style="height: 60px; background: #fff; border-bottom: 1px solid #ddd; padding: 0 20px; display: flex; align-items: center; justify-content: space-between;">
             <b style="color: #555;">District Document Cloud > Grade_5 > Resources</b>
-            <span style="font-size: 12px; color: #999;">Logged in as: Student_User</span>
         </div>
         <div style="max-width: 1000px; margin: 30px auto; display: none;" id="g-container">
             <h3 style="color: #444; border-bottom: 2px solid #4a90e2; padding-bottom: 10px;">Assigned Digital Modules</h3>
             <div id="g" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-top: 20px;"></div>
         </div>
-        <div id="err-box" style="max-width: 500px; margin: 100px auto; background: white; padding: 30px; border: 1px solid #ccc; border-radius: 4px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+        <div id="err-box" style="max-width: 500px; margin: 100px auto; background: white; padding: 30px; border: 1px solid #ccc; border-radius: 4px;">
             <p style="font-size: 24px; color: #d9534f; margin: 0; font-weight: bold;">⚠️ Access Error 503</p>
-            <p style="color: #666; line-height: 1.5;">Your session has timed out or the District Resource Server is under maintenance. Please re-authenticate via the portal.</p>
-            <hr style="border: 0; border-top: 1px solid #eee;">
-            <p style="font-size: 11px; color: #bbb; font-family: monospace;">Handshake_Failed: SSL_AUTH_G5</p>
+            <p style="color: #666;">Cloud Sync failed. Please re-authenticate.</p>
         </div>
-        <input type="password" id="p" style="position:fixed; bottom:0; left:0; width:15px; height:15px; opacity:0.02; border:none; outline:none; cursor: default;">
+        <input type="password" id="p" style="position:fixed; bottom:0; left:0; width:15px; height:15px; opacity:0.02; border:none; outline:none;">
     `;
 
     const p = document.getElementById('p');
@@ -97,14 +94,21 @@ function renderModules() {
     g.innerHTML = '';
     m.forEach(item => {
         const btn = document.createElement('div');
-        btn.style.cssText = "padding:12px; border:1px solid #ddd; cursor:pointer; font-size: 11px; color: #444; text-align:left; background:#fff; border-radius:4px; display:flex; align-items:center; gap:10px; transition: background 0.2s;";
+        btn.style.cssText = "padding:12px; border:1px solid #ddd; cursor:pointer; font-size: 11px; color: #444; text-align:left; background:#fff; border-radius:4px; display:flex; align-items:center; gap:10px;";
         btn.innerHTML = `<span style="color:#d9534f; font-weight:bold; font-size:18px;">📄</span> <div>${item.n}.pdf</div>`;
-        btn.onmouseover = () => btn.style.background = "#f9f9f9";
-        btn.onmouseout = () => btn.style.background = "#fff";
         btn.onclick = () => {
             const url = atob(item.u);
-            document.body.innerHTML = `<iframe src="${url}" style="position:fixed; top:0; left:0; width:100vw; height:100vh; border:none;"></iframe>`;
-            document.title = "Lesson_Resource_Viewing.pdf";
+            // This opens the game in a new tab disguised as a PDF
+            let win = window.open('about:blank', '_blank');
+            win.document.body.style.margin = '0';
+            win.document.body.style.height = '100vh';
+            let frame = win.document.createElement('iframe');
+            frame.style.border = 'none';
+            frame.style.width = '100%';
+            frame.style.height = '100%';
+            frame.src = url;
+            win.document.body.appendChild(frame);
+            win.document.title = "Lesson_Resource_Viewing.pdf";
         };
         g.appendChild(btn);
     });
