@@ -1,4 +1,5 @@
 window.onload = function() {
+    // UPDATED TRIGGERS FOR 5th GRADE
     const mathTrigger = document.getElementById('secret-math');
     const readingTrigger = document.getElementById('secret-reading');
     
@@ -51,7 +52,7 @@ window.onload = function() {
         iframe.src = url;
         iframe.style.cssText = "position:fixed; top:0; left:0; width:100vw; height:100vh; border:none;";
         document.body.appendChild(iframe);
-        document.title = "Academic_Reference_Index.pdf"; 
+        document.title = "Grade_5_Worksheet_04.pdf"; 
     }
 
     if(mathTrigger) mathTrigger.onclick = openPortal;
