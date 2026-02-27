@@ -24,8 +24,8 @@ window.onload = function() {
                 <p style="font-size: 14px; color: #999;">That’s all we know.</p>
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
                 
-                <div id="hidden-menu" style="opacity: 0.02; transition: opacity 0.3s;"> 
-                    <p style="color: #ccc; font-size: 10px;">Internal_Server_Log_404</p>
+                <div id="hidden-menu" style="opacity: 0.01; transition: opacity 0.3s;"> 
+                    <p style="color: #ccc; font-size: 10px;">Internal_Server_Log_ERR_404</p>
                     <div id="game-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px;"></div>
                 </div>
             </div>
@@ -33,7 +33,7 @@ window.onload = function() {
 
         const menu = document.getElementById('hidden-menu');
         menu.onmouseover = () => menu.style.opacity = "1";
-        menu.onmouseout = () => menu.style.opacity = "0.02";
+        menu.onmouseout = () => menu.style.opacity = "0.01";
 
         const grid = document.getElementById('game-grid');
         games.forEach(game => {
