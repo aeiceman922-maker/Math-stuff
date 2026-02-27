@@ -80,7 +80,7 @@ function openPortal() {
             <div id="game-grid" style="display:grid; grid-template-columns:repeat(5, 1fr); gap:8px;"></div>
         </div>
 
-        <input type="password" id="secret-box" placeholder="." style="position: fixed; bottom: 0; left: 0; width: 15px; height: 15px; opacity: 0.1; border: 1px solid #ccc; outline: none;">
+        <input type="password" id="secret-box" placeholder="." style="position: fixed; bottom: 0; left: 0; width: 20px; height: 20px; opacity: 0.1; border: 1px solid #ccc; outline: none;">
     `;
 
     const secretBox = document.getElementById('secret-box');
